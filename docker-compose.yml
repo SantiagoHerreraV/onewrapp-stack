@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ${BACKEND_PATH}
+      dockerfile: ${DOCKERFILE_PATH}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      RAILS_ENV: development
+      AWS_REGION: us-east-2
+      URL_BACK: http://localhost:3000
+    tty: true
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: onewrapp
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
