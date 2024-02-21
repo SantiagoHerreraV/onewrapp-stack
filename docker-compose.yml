@@ -5,6 +5,8 @@ services:
     build:
       context: ${BACKEND_PATH}
       dockerfile: ${DOCKERFILE_PATH}
+    volumes:
+      - ${BACKEND_PATH}:/app
     ports:
       - "3000:3000"
     depends_on:
